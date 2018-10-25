@@ -1,0 +1,8 @@
+create external table GAoutputRegression
+(
+	slope float,
+	intercept float
+) row format delimited
+  fields terminated by ','
+  stored as textfile
+  location 'output/regression1';

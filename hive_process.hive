@@ -1,0 +1,11 @@
+FROM (
+   FROM GAinputTable
+   SELECT ga_date, ga_visitor, ga_bounce
+   DISTRIBUTE BY ga_campaign SORT BY ga_campaign, ga_date
+   ) src
+   INSERT OVERWRITE TABLE GAoutputRegression
+   SELECT TRANSFORM (src.ga_date, src.ga_visitor, src.ga_bounce) USING './testHive1_realuse.py'
+   AS (slope, intercept);
+
+
+
